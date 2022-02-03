@@ -1,28 +1,18 @@
 import React, { FC } from "react";
-import { StyleSheet, Text, View, ViewStyle } from "react-native";
-import { aaa } from "@env"
-
-interface Styles {
-  container: ViewStyle;
-}
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import { NavigationContainer } from '@react-navigation/native'
+import TabNavigation from "./navigations/TabNavigation";
 
 const App: FC = () => {
 
   return (
-    <View style={styles.container}>
-      <Text>
-        Hello World! {aaa}
-      </Text>
-    </View>
+    <Provider store={store}>
+      <NavigationContainer>
+        <TabNavigation />
+      </NavigationContainer>
+    </Provider>
   );
 };
-
-const styles = StyleSheet.create<Styles>({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})
 
 export default App;
