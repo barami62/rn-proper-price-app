@@ -1,15 +1,28 @@
 import React, { FC } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View, ViewStyle } from "react-native";
+import { aaa } from "@env"
+
+interface Styles {
+  container: ViewStyle;
+}
 
 const App: FC = () => {
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>
-        Hello World!
+        Hello World! {aaa}
       </Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create<Styles>({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+})
 
 export default App;
