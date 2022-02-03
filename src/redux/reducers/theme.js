@@ -1,12 +1,25 @@
+const colors = {
+  WHITE: "#ffffff",
+  DARK: "#000000",
+  BRIGHT_DARK: "#17171b",
+  BRIGHT_GRAY: "#d2d2d2",
+  IOLITE: "#6236ff"
+};
+
+const commonStyle = {
+  mainButton: colors.IOLITE,
+  focusedColor: colors.IOLITE,
+  unfocusedColor: colors.BRIGHT_GRAY,
+};
+
 const initialState = {
   LIGHT_MODE: {
-    backgroundColor: "#FFFFFF",
-    createButton: "#5C7AEA",
-    buttonText: "#FFFFFF",
-    deletePasswordButton: "#FF2626",
+    ...commonStyle,
+    backgroundColor: colors.WHITE,
   },
   DARK_MODE: {
-
+    ...commonStyle,
+    backgroundColor: colors.BRIGHT_DARK,
   },
 };
 
