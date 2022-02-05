@@ -15,6 +15,8 @@ const commonStyle = {
 const initialState = {
   LIGHT_MODE: {
     ...commonStyle,
+    fontColor: colors.DARK,
+    contentBackgroundColor: colors.BRIGHT_GRAY,
     backgroundColor: colors.WHITE,
   },
   DARK_MODE: {
