@@ -11,7 +11,6 @@ interface ContainerProps {
 const Container = styled.View<ContainerProps>`
   width: ${({ width }) => width - 60}px;
   height: 48px;
-  align-items: center;
   justify-content: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 10px;
@@ -23,16 +22,20 @@ interface TextProps {
 const Text = styled.Text<TextProps>`
   color: ${({ fontColor }) => fontColor};
   font-size: 25px;
+  margin-left: 15px;
 `;
 
-const LongText: FC = () => {
+interface Props {
+  text: string;
+}
+const LongText: FC<Props> = ({ text }: Props) => {
   const width = useWindowDimensions().width;
   const { fontColor, contentBackgroundColor } = useSelector((state: any) => state.themes.LIGHT_MODE);
 
   return (
     <Container width={width} backgroundColor={contentBackgroundColor}>
       <Text fontColor={fontColor}>
-        Hi
+        {text}
       </Text>
     </Container>
   )
