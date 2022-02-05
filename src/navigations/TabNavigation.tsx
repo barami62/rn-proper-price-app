@@ -4,12 +4,13 @@ import MainScreen from "../screens/MainScreen";
 import { Image } from "react-native";
 import { images } from "../images";
 import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducer";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const TabNavigation: FC = () => {
   const { calculIcon, infoIcon } = images;
-  const { focusedColor, unfocusedColor }: any = useSelector((state: any) => state.themes.LIGHT_MODE);
+  const { focusedColor, unfocusedColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
 
   return (
     <Navigator>

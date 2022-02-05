@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useWindowDimensions } from "react-native";
-import { State } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import styled from "styled-components/native";
+import { RootState } from "../redux/reducer";
 
 interface ContainerProps {
   width: number;
@@ -30,7 +30,7 @@ interface Props {
 }
 const LongText: FC<Props> = ({ text }: Props) => {
   const width = useWindowDimensions().width;
-  const { fontColor, contentBackgroundColor } = useSelector((state: any) => state.themes.LIGHT_MODE);
+  const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
 
   return (
     <Container width={width} backgroundColor={contentBackgroundColor}>

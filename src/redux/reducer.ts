@@ -5,4 +5,6 @@ const rootReducer = combineReducers({
   themes: ThemeReducer
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 export default rootReducer;

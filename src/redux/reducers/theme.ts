@@ -25,12 +25,7 @@ const initialState = {
   },
 };
 
-const ThemeReducer = (state = initialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+const ThemeReducer = (state = initialState) => state;
 
 export default ThemeReducer;
 
