@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import AnalysisButton from "../components/AnalysisButton";
+import LongTextButton from "../components/LongTextButton";
 
 interface ContainerProps {
   backgroundColor: string;
@@ -22,7 +23,7 @@ const MainScreen: FC = ({ }: Props) => {
 
   return (
     <Container backgroundColor={backgroundColor}>
-      <LongText text="안녕하세요" />
+      <LongTextButton text="안녕하세요" />
       <LongText text="반갑습니다" />
       <AnalysisButton />
     </Container>
