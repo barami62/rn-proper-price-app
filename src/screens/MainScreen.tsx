@@ -17,15 +17,18 @@ const Container = styled.View<ContainerProps>`
   background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
-interface Props { }
-const MainScreen: FC = ({ }: Props) => {
+interface Props {
+  navigation: any
+}
+const MainScreen = ({ navigation }: Props) => {
   const { backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const onPress = () => navigation.navigate('Search');
 
   return (
     <Container backgroundColor={backgroundColor}>
-      <LongTextButton text="안녕하세요" />
+      <LongTextButton onPress={onPress} text="안녕하세요" />
       <LongText text="반갑습니다" />
-      <AnalysisButton />
+      <AnalysisButton onPress={onPress} />
     </Container>
   );
 };

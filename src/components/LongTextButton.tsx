@@ -28,13 +28,14 @@ const Text = styled.Text<TextProps>`
 
 interface Props {
   text: string;
+  onPress?: () => {}
 }
-const LongTextButton: FC<Props> = ({ text }: Props) => {
+const LongTextButton = ({ text, onPress }: Props) => {
   const width = useWindowDimensions().width;
   const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
 
   return (
-    <Container width={width} backgroundColor={contentBackgroundColor}>
+    <Container onPress={onPress} width={width} backgroundColor={contentBackgroundColor}>
       <Text fontColor={fontColor}>
         {text}
       </Text>

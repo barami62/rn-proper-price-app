@@ -5,6 +5,7 @@ import { Image } from "react-native";
 import { images } from "../images";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
+import StackNavigation from "./StackNavigation";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -13,10 +14,14 @@ const TabNavigation: FC = () => {
   const { focusedColor, unfocusedColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
 
   return (
-    <Navigator>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Screen
         name="Main"
-        component={MainScreen}
+        component={StackNavigation}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image

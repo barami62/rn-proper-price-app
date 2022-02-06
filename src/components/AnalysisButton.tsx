@@ -29,13 +29,15 @@ const Text = styled.Text<TextProps>`
   font-weight: 500;
 `;
 
-interface Props { }
-const AnalysisButton = ({ }: Props) => {
+interface Props {
+  onPress: () => {}
+}
+const AnalysisButton = ({ onPress }: Props) => {
   const width = useWindowDimensions().width;
   const { mainButton, mainButtonFontColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
 
   return (
-    <Container width={width} backgroundColor={mainButton}>
+    <Container onPress={onPress} width={width} backgroundColor={mainButton}>
       <Text fontColor={mainButtonFontColor}>
         분석하기
       </Text>
