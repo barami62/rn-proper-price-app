@@ -16,6 +16,7 @@ const initialState = {
   LIGHT_MODE: {
     ...commonStyle,
     fontColor: colors.DARK,
+    mainButtonFontColor: colors.WHITE,
     contentBackgroundColor: colors.BRIGHT_GRAY,
     backgroundColor: colors.WHITE,
   },

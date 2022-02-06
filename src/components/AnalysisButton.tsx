@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { useWindowDimensions } from "react-native";
 import { useSelector } from "react-redux";
 import styled from "styled-components/native";
@@ -11,6 +11,7 @@ interface ContainerProps {
 const Container = styled.View<ContainerProps>`
   width: ${({ width }) => width - 40}px;
   height: 44px;
+  align-items: center;
   justify-content: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 12px;
@@ -22,24 +23,24 @@ interface TextProps {
 }
 const Text = styled.Text<TextProps>`
   color: ${({ fontColor }) => fontColor};
-  font-size: 14px;
+  font-size: 16px;
   margin-left: 12px;
+  text-align: center;
+  font-weight: 500;
 `;
 
-interface Props {
-  text: string;
-}
-const LongText: FC<Props> = ({ text }: Props) => {
+interface Props { }
+const AnalysisButton = ({ }: Props) => {
   const width = useWindowDimensions().width;
-  const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const { mainButton, mainButtonFontColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
 
   return (
-    <Container width={width} backgroundColor={contentBackgroundColor}>
-      <Text fontColor={fontColor}>
-        {text}
+    <Container width={width} backgroundColor={mainButton}>
+      <Text fontColor={mainButtonFontColor}>
+        분석하기
       </Text>
     </Container>
   )
 };
 
-export default LongText;
+export default AnalysisButton
