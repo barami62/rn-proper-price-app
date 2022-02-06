@@ -8,7 +8,7 @@ interface ContainerProps {
   width: number;
   backgroundColor: string;
 }
-const Container = styled.View<ContainerProps>`
+const Container = styled.TouchableOpacity<ContainerProps>`
   width: ${({ width }) => width - 40}px;
   height: 44px;
   align-items: center;
