@@ -9,11 +9,12 @@ interface ContainerProps {
   backgroundColor: string;
 }
 const Container = styled.View<ContainerProps>`
-  width: ${({ width }) => width - 60}px;
-  height: 48px;
+  width: ${({ width }) => width - 40}px;
+  height: 44px;
   justify-content: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
-  border-radius: 10px;
+  border-radius: 12px;
+  margin-bottom: 16px;
 `;
 
 interface TextProps {
@@ -21,8 +22,8 @@ interface TextProps {
 }
 const Text = styled.Text<TextProps>`
   color: ${({ fontColor }) => fontColor};
-  font-size: 25px;
-  margin-left: 15px;
+  font-size: 14;
+  margin-left: 12px;
 `;
 
 interface Props {

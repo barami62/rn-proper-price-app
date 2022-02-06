@@ -2,7 +2,7 @@ const colors = {
   WHITE: "#ffffff",
   DARK: "#000000",
   BRIGHT_DARK: "#17171b",
-  BRIGHT_GRAY: "#d2d2d2",
+  BRIGHT_GRAY: "#f0f0f0",
   IOLITE: "#6236ff"
 };
 
