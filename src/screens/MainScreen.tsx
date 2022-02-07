@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import AnalysisButton from "../components/AnalysisButton";
 import LongTextButton from "../components/LongTextButton";
+import OutlineTableView from "../components/OutlineTableView";
 
 interface ContainerProps {
   backgroundColor: string;
@@ -29,6 +30,7 @@ const MainScreen = ({ navigation }: Props) => {
       <LongTextButton onPress={onPress} text="안녕하세요" />
       <LongText text="반갑습니다" />
       <AnalysisButton onPress={onPress} />
+      <OutlineTableView />
     </Container>
   );
 };
