@@ -6,6 +6,7 @@ import { images } from "../images";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import StackNavigation from "./StackNavigation";
+import InfoScreen from "../screens/InfoScreen";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -37,7 +38,7 @@ const TabNavigation: FC = () => {
       />
       <Screen
         name="Info"
-        component={MainScreen}
+        component={InfoScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
