@@ -15,7 +15,7 @@ const Container = styled.TouchableOpacity<ContainerProps>`
   justify-content: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 `;
 
 interface TextProps {

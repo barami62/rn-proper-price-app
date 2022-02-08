@@ -7,6 +7,7 @@ import { RootState } from "../redux/reducer";
 import AnalysisButton from "../components/AnalysisButton";
 import LongTextButton from "../components/LongTextButton";
 import OutlineTableView from "../components/OutlineTableView";
+import DetailTableView from "../components/DetailTableView";
 
 interface ContainerProps {
   backgroundColor: string;
@@ -31,6 +32,7 @@ const MainScreen = ({ navigation }: Props) => {
       <LongText text="반갑습니다" />
       <AnalysisButton onPress={onPress} />
       <OutlineTableView />
+      <DetailTableView />
     </Container>
   );
 };

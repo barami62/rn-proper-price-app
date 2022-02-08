@@ -35,14 +35,14 @@ interface ContainerProps {
   width: number;
   backgroundColor: string;
 }
-const Container = styled.TouchableOpacity<ContainerProps>`
+const Container = styled.View<ContainerProps>`
   width: ${({ width }) => width - 40}px;
   justify-content: center;
   align-items: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 12px;
   padding-vertical: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 `;
 interface Props {
   consensusStandard?: string;
