@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import LongText from "../components/LongText";
 import styled from "styled-components/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import { FNGUIDE_STOCKS_LIST } from "@env";
 import axios from "axios";
+import { setStocks, Stock } from "../redux/reducers/stocks";
 
 interface ContainerProps {
   backgroundColor: string;
@@ -20,21 +21,16 @@ interface Props {
   setIsLoading: Function;
 }
 const LoadingScreen = ({ setIsLoading }: Props) => {
-  interface Stock {
-    cd: string;
-    gb: string;
-    nm: string;
-  }
-  const [stocks, setStocks] = useState<Stock[] | null>();
   const [stateText, setStateText] = useState<string>("로딩중...");
   const { backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const dispatch = useDispatch();
 
   const getStocks = (): void => {
     try {
       axios.get(FNGUIDE_STOCKS_LIST)
         .then(res => {
           const stocks: Stock[] = res.data.Co;
-          setStocks(stocks);
+          dispatch(setStocks(stocks));
           setIsLoading(false);
         });
     } catch (error) {

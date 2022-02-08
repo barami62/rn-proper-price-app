@@ -1,28 +1,39 @@
-const INCREASE = 'counter/INCREASE' as const;
+const SET_STOCKS = 'stocks/SET_STOCKS' as const;
 
-export const increase = () => ({
-  type: INCREASE
+export const setStocks = (stocks: Stock[]) => ({
+  type: SET_STOCKS,
+  payload: stocks,
 });
 
-type CounterAction =
-  | ReturnType<typeof increase>;
+type StockAction =
+  | ReturnType<typeof setStocks>;
 
-type CounterState = {
-  count: number;
+export type Stock = {
+  cd: string;
+  gb: string;
+  nm: string;
+}
+
+interface initialState {
+  stocks: Stock[]
+}
+
+const initialState: initialState = {
+  stocks: []
 };
 
-const initialState = {
-
-};
-
-const StockReducer = (state = initialState, action: CounterAction) => {
+const StockReducer = (
+  state: initialState = initialState,
+  action: StockAction
+): initialState => {
   switch (action.type) {
-    case INCREASE:
-
-      break;
+    case SET_STOCKS:
+      const newState = { ...state };
+      newState.stocks = action.payload;
+      return newState;
 
     default:
-      break;
+      return state;
   }
 };
 
