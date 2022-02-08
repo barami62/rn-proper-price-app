@@ -14,7 +14,11 @@ const StackNavigation: FC = () => {
   const SearchHeader = () => {
     const { contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
     return (
-      <TextInput style={{ flex: 1, backgroundColor: contentBackgroundColor, width: 300, borderRadius: 12, justifyContent: 'center', paddingLeft: 12 }} />
+      <TextInput
+        placeholder="삼성전자"
+        value="삼성전자"
+        style={{ flex: 1, backgroundColor: contentBackgroundColor, width: 300, borderRadius: 12, justifyContent: 'center', paddingLeft: 12 }}
+      />
     )
   }
 
