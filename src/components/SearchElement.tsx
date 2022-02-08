@@ -3,6 +3,7 @@ import { useWindowDimensions } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import styled from "styled-components/native";
+import { Stock } from "../redux/reducers/stocks";
 
 
 const FirstText = styled.Text`
@@ -28,9 +29,10 @@ const SmallView = styled.View`
 interface ContainerProps {
   width: number;
   backgroundColor: string;
+  onPress: Function;
 }
 
-const Container = styled.View<ContainerProps>`
+const Container = styled.TouchableOpacity<ContainerProps>`
   width: ${({ width }) => width - 40}px;
   height: 44px;
   justify-content: center;
@@ -40,15 +42,23 @@ const Container = styled.View<ContainerProps>`
   margin-horizontal: 20px;
 `;
 
-const SearchElement = () => {
+interface Props {
+  stockInfo: Stock;
+  onPress: any;
+}
+const SearchElement = ({ stockInfo, onPress }: Props) => {
+  console.log("stockInfo", stockInfo);
+
   const width = useWindowDimensions().width;
   const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const stockName = stockInfo.nm;
+  const numberCode = stockInfo.cd.slice(1);
 
   return (
-    <Container width={width} backgroundColor={contentBackgroundColor}>
+    <Container onPress={onPress} width={width} backgroundColor={contentBackgroundColor}>
       <SmallView>
-        <FirstText>삼성전자</FirstText>
-        <SecondText>005930</SecondText>
+        <FirstText>{stockName}</FirstText>
+        <SecondText>{numberCode}</SecondText>
       </SmallView>
     </Container>
   );

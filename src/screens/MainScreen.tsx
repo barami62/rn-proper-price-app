@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LongText from "../components/LongText";
 import styled from "styled-components/native";
 import { useSelector } from "react-redux";
@@ -19,15 +19,23 @@ const Container = styled.View<ContainerProps>`
 `;
 
 interface Props {
-  navigation: any
+  navigation: any;
+  route: {
+    params: any;
+  };
 }
-const MainScreen = ({ navigation }: Props) => {
+const MainScreen = ({ navigation, route }: Props) => {
   const { backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
-  const onPress = () => navigation.navigate('Search');
+  const onPress = () => navigation.navigate('Search', {
+    stockInput
+  });
+  const stockInput: string = route?.params?.stockName || "삼성전자";
+  const [textState, onChangeTextState] = useState("대기");
+  const [disableTouch, setDisableTouch] = useState(false);
 
   return (
     <Container backgroundColor={backgroundColor}>
-      <LongTextButton onPress={onPress} text="안녕하세요" />
+      <LongTextButton onPress={onPress} text={stockInput} />
       <LongText text="반갑습니다" />
       <AnalysisButton onPress={onPress} />
       <OutlineTableView />

@@ -1,26 +1,28 @@
-import React, { FC } from "react";
+import React, { useState } from "react";
 import MainScreen from "../screens/MainScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import SearchScreen from "../screens/SearchScreen";
-import { Alert, Button, Image, Text, TextInput, View } from "react-native";
-import { images } from "../images";
+import { TextInput } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 
+const SearchHeader = ({ value, onChangeText }: any) => {
+  const { contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+
+  return (
+    <TextInput
+      value={value}
+      onChangeText={onChangeText}
+      style={{ flex: 1, backgroundColor: contentBackgroundColor, width: 300, borderRadius: 12, justifyContent: 'center', paddingLeft: 12 }}
+    />
+  )
+}
+
 const { Navigator, Screen } = createStackNavigator();
 
-const StackNavigation: FC = () => {
-
-  const SearchHeader = () => {
-    const { contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
-    return (
-      <TextInput
-        placeholder="삼성전자"
-        value="삼성전자"
-        style={{ flex: 1, backgroundColor: contentBackgroundColor, width: 300, borderRadius: 12, justifyContent: 'center', paddingLeft: 12 }}
-      />
-    )
-  }
+const StackNavigation = () => {
+  const [stockInput, setStockInput] = useState<string>("");
+  const onChangeText = (text: string) => setStockInput(text);
 
   return (
     <Navigator>
@@ -33,9 +35,9 @@ const StackNavigation: FC = () => {
       />
       <Screen
         name="Search"
-        component={SearchScreen}
+        children={({ navigation }) => <SearchScreen navigation={navigation} stockInput={stockInput} />}
         options={{
-          headerTitle: () => <SearchHeader />,
+          headerTitle: () => <SearchHeader value={stockInput} onChangeText={onChangeText} />,
           headerBackTitleVisible: false,
           headerShadowVisible: true
         }}
