@@ -1,5 +1,6 @@
 declare module '@env' {
-  export const API_BASE: string;
-  export const aaa: string;
+  export const AWS_PROPER_PRICE_URL: string;
+  export const FNGUIDE_STOCKS_LIST: string;
+  export const test: string;
   export const bbb: string;
 }

@@ -1,5 +1,4 @@
-import React, { FC } from "react";
-import { aaa } from "@env"
+import React from "react";
 import LongText from "../components/LongText";
 import styled from "styled-components/native";
 import { useSelector } from "react-redux";
