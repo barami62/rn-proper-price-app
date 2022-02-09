@@ -31,7 +31,8 @@ interface Props {
 }
 const LongText: FC<Props> = ({ text }: Props) => {
   const width = useWindowDimensions().width;
-  const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { fontColor, contentBackgroundColor }: any = themes[themes.NOW_MODE];
 
   return (
     <Container width={width} backgroundColor={contentBackgroundColor}>

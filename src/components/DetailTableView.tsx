@@ -5,10 +5,14 @@ import styled from "styled-components/native";
 import { RootState } from "../redux/reducer";
 import { StockPriceInfo } from "../redux/reducers/stocks";
 
-const Text = styled.Text`
+interface TextProps {
+  fontColor: string;
+}
+const Text = styled.Text<TextProps>`
   flex: 1;
   font-size: 14px;
   text-align: center;
+  color: ${({ fontColor }) => fontColor}
 `;
 
 interface ViewProps {
@@ -60,12 +64,14 @@ interface TextLineProps {
   thirdText: string;
 }
 const TextLine = ({ firstText, secondText, thirdText }: TextLineProps) => {
+  const themes = useSelector((state: RootState) => state.themes);
+  const { fontColor, }: any = themes[themes.NOW_MODE];
 
   return (
     <>
-      <Text>{firstText}</Text>
-      <Text>{secondText}</Text>
-      <Text>{thirdText}</Text>
+      <Text fontColor={fontColor}>{firstText}</Text>
+      <Text fontColor={fontColor}>{secondText}</Text>
+      <Text fontColor={fontColor}>{thirdText}</Text>
     </>
   )
 }
@@ -75,7 +81,8 @@ interface Props {
 }
 const DetailTableView = ({ }: Props) => {
   const width = useWindowDimensions().width;
-  const { fontColor, contentBackgroundColor, backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { backgroundColor, contentBackgroundColor }: any = themes[themes.NOW_MODE];
   let {
     first_price,
     second_price,

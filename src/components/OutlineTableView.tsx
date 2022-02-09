@@ -5,17 +5,22 @@ import styled from "styled-components/native";
 import { RootState } from "../redux/reducer";
 import { StockPriceInfo } from "../redux/reducers/stocks";
 
-const FirstText = styled.Text`
+interface TextProps {
+  fontColor: string;
+}
+const FirstText = styled.Text<TextProps>`
   flex: 1;
   font-size: 14px;
   text-align: left;
+  color: ${({ fontColor }) => fontColor}
 `;
 
-const SecondText = styled.Text`
+const SecondText = styled.Text<TextProps>`
   flex: 1;
   font-size: 14px;
   font-weight: bold;
   text-align: right;
+  color: ${({ fontColor }) => fontColor}
 `;
 
 const SmallView = styled.View`
@@ -29,7 +34,7 @@ const SmallView = styled.View`
 const Divider = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: #ECECEC;
-  width: 280px;
+  width: 300px;
 `;
 
 interface ContainerProps {
@@ -52,10 +57,8 @@ interface Props {
 }
 const OutlineTableView = ({ }: Props) => {
   const width = useWindowDimensions().width;
-  const {
-    fontColor,
-    contentBackgroundColor
-  } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { fontColor, contentBackgroundColor, }: any = themes[themes.NOW_MODE];
   let {
     D_5,
     required_yield,
@@ -69,18 +72,18 @@ const OutlineTableView = ({ }: Props) => {
   return (
     <Container width={width} backgroundColor={contentBackgroundColor}>
       <SmallView>
-        <FirstText>컨센서스 기준</FirstText>
-        <SecondText>{D_5}</SecondText>
+        <FirstText fontColor={fontColor}>컨센서스 기준</FirstText>
+        <SecondText fontColor={fontColor}>{D_5}</SecondText>
       </SmallView>
       <Divider />
       <SmallView>
-        <FirstText>요구수익률</FirstText>
-        <SecondText>{required_yield_percent}</SecondText>
+        <FirstText fontColor={fontColor}>요구수익률</FirstText>
+        <SecondText fontColor={fontColor}>{required_yield_percent}</SecondText>
       </SmallView>
       <Divider />
       <SmallView>
-        <FirstText>현재가</FirstText>
-        <SecondText>{now_price_comma}</SecondText>
+        <FirstText fontColor={fontColor}>현재가</FirstText>
+        <SecondText fontColor={fontColor}>{now_price_comma}</SecondText>
       </SmallView>
     </Container>
   );

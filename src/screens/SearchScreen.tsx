@@ -31,7 +31,8 @@ interface renderItemProps {
 }
 
 const SearchScreen = ({ navigation, stockInput }: any) => {
-  const { fontColor, backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { backgroundColor }: any = themes[themes.NOW_MODE];
   const stocks: Stock[] = useSelector((state: RootState) => state.stocks.stocks);
   const banList = ['ETN', 'KODEX', 'TIGER', 'ARIRANG', 'HANARO', 'SMART', 'KBSTAR', 'KINDEX', 'KOSEF', '스팩', '하이골드', 'FOCUS', "SOL", "MASTER", "마이티", "WOORI"];
   const list = stocks

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MainScreen from "../screens/MainScreen";
 import { Image } from "react-native";
 import { images } from "../images";
 import { useSelector } from "react-redux";
@@ -12,12 +11,16 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 const TabNavigation: FC = () => {
   const { calculIcon, infoIcon } = images;
-  const { focusedColor, unfocusedColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { focusedColor, unfocusedColor, backgroundColor }: any = themes[themes.NOW_MODE];
 
   return (
     <Navigator
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: backgroundColor
+        }
       }}
     >
       <Screen

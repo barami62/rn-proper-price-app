@@ -35,7 +35,8 @@ interface Props {
 }
 const AnalysisButton = ({ onPress, disabled }: Props) => {
   const width = useWindowDimensions().width;
-  const { mainButton, mainButtonFontColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { mainButton, mainButtonFontColor }: any = themes[themes.NOW_MODE];
 
   return (
     <Container disabled={disabled} onPress={onPress} width={width} backgroundColor={mainButton}>

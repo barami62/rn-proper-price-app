@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { useWindowDimensions } from "react-native";
 import { useSelector } from "react-redux";
 import styled from "styled-components/native";
@@ -32,7 +32,8 @@ interface Props {
 }
 const LongTextButton = ({ text, onPress }: Props) => {
   const width = useWindowDimensions().width;
-  const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { fontColor, contentBackgroundColor }: any = themes[themes.NOW_MODE];
 
   return (
     <Container onPress={onPress} width={width} backgroundColor={contentBackgroundColor}>

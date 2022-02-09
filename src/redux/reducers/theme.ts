@@ -1,7 +1,17 @@
+const SET_MODE = 'themes/SET_MODE' as const;
+
+export const setMode = () => ({
+  type: SET_MODE,
+});
+
+type ThemeAction =
+  | ReturnType<typeof setMode>;
+
 const colors = {
   WHITE: "#ffffff",
   DARK: "#000000",
   BRIGHT_DARK: "#17171b",
+  MORE_BRIGHT_DARK: "#202026",
   BRIGHT_GRAY: "#f0f0f0",
   IOLITE: "#6236ff"
 };
@@ -22,11 +32,35 @@ const initialState = {
   },
   DARK_MODE: {
     ...commonStyle,
+    fontColor: colors.WHITE,
+    mainButtonFontColor: colors.WHITE,
+    contentBackgroundColor: colors.MORE_BRIGHT_DARK,
     backgroundColor: colors.BRIGHT_DARK,
   },
+  NOW_MODE: "LIGHT_MODE",
 };
 
-const ThemeReducer = (state = initialState) => state;
+interface initialState {
+  LIGHT_MODE: any,
+  DARK_MODE: any,
+  NOW_MODE: string,
+}
+
+const ThemeReducer = (
+  state = initialState,
+  action: ThemeAction,
+): any => {
+  const newState = { ...state };
+
+  switch (action.type) {
+    case SET_MODE:
+      newState.NOW_MODE = newState.NOW_MODE === "LIGHT_MODE" ? "DARK_MODE" : "LIGHT_MODE";
+      return newState;
+
+    default:
+      return newState;
+  }
+};
 
 export default ThemeReducer;
 

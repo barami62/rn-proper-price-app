@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import { Linking } from "react-native";
 import InfoText from "../components/InfoText";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import LongTextButton from "../components/LongTextButton"
+import { setMode } from "../redux/reducers/theme";
 
 interface ContainerProps {
   backgroundColor: string;
@@ -26,11 +28,21 @@ interface Props {
 
 }
 const InfoScreen = ({ }: Props) => {
-  const { backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { backgroundColor }: any = themes[themes.NOW_MODE];
+  const nowThemeMode = useSelector((state: RootState) => state.themes.NOW_MODE);
+  const [nowModeText, seNnowModeText] = useState<string>("라이트모드");
+  const dispatch = useDispatch();
+  const onPressTheme = (): any => {
+    const text = nowThemeMode === "LIGHT_MODE" ? "다크모드" : "라이트모드";
+    seNnowModeText(text);
+    dispatch(setMode())
+  };
 
   return (
     <Container backgroundColor={backgroundColor}>
       <ScrollView backgroundColor={backgroundColor}>
+        <LongTextButton onPress={onPressTheme} text={nowModeText} />
         <InfoText>
           이 앱은 책 "재무제표 모르면 주식투자 절대로 하지마라" 에서 소개된 S-RIM 방식을 활용하여, 회사명(또는 번호)만 입력하면 이후의 과정을 자동화한 앱입니다. 따라서 계산 결과는 참고사항일 뿐이며, 실제 투자는 본인의 책임입니다.
         </InfoText>

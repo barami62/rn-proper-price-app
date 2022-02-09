@@ -7,14 +7,23 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 
 const SearchHeader = ({ value, onChangeText }: any) => {
-  const { contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { fontColor, contentBackgroundColor, }: any = themes[themes.NOW_MODE];
 
   return (
     <TextInput
       placeholder="삼성전자"
       value={value}
       onChangeText={onChangeText}
-      style={{ flex: 1, backgroundColor: contentBackgroundColor, width: 300, borderRadius: 12, justifyContent: 'center', paddingLeft: 12 }}
+      style={{
+        flex: 1,
+        backgroundColor: contentBackgroundColor,
+        color: fontColor,
+        width: 300,
+        borderRadius: 12,
+        justifyContent: 'center',
+        paddingLeft: 12
+      }}
     />
   )
 }
@@ -24,6 +33,8 @@ const { Navigator, Screen } = createStackNavigator();
 const StackNavigation = () => {
   const [stockInput, setStockInput] = useState<string>("");
   const onChangeText = (text: string) => setStockInput(text);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { backgroundColor }: any = themes[themes.NOW_MODE];
 
   return (
     <Navigator>
@@ -40,7 +51,10 @@ const StackNavigation = () => {
         options={{
           headerTitle: () => <SearchHeader value={stockInput} onChangeText={onChangeText} />,
           headerBackTitleVisible: false,
-          headerShadowVisible: true
+          headerShadowVisible: true,
+          headerStyle: {
+            backgroundColor: backgroundColor
+          }
         }}
       />
     </Navigator>

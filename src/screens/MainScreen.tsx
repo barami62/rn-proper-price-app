@@ -27,7 +27,8 @@ interface Props {
   };
 }
 const MainScreen = ({ navigation, route }: Props) => {
-  const { backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const themes = useSelector((state: RootState) => state.themes);
+  const { backgroundColor }: any = themes[themes.NOW_MODE];
   const onPressSearch = () => navigation.navigate('Search', {
     stockInput
   });
