@@ -30,14 +30,15 @@ const Text = styled.Text<TextProps>`
 `;
 
 interface Props {
-  onPress: () => {}
+  onPress: any;
+  disabled: boolean;
 }
-const AnalysisButton = ({ onPress }: Props) => {
+const AnalysisButton = ({ onPress, disabled }: Props) => {
   const width = useWindowDimensions().width;
   const { mainButton, mainButtonFontColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
 
   return (
-    <Container onPress={onPress} width={width} backgroundColor={mainButton}>
+    <Container disabled={disabled} onPress={onPress} width={width} backgroundColor={mainButton}>
       <Text fontColor={mainButtonFontColor}>
         분석하기
       </Text>

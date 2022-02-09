@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import LongText from "../components/LongText";
 import styled from "styled-components/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import AnalysisButton from "../components/AnalysisButton";
 import LongTextButton from "../components/LongTextButton";
 import OutlineTableView from "../components/OutlineTableView";
 import DetailTableView from "../components/DetailTableView";
+import { AWS_PROPER_PRICE_URL } from "@env";
+import { setStockPriceInfo } from "../redux/reducers/stocks"
 
 interface ContainerProps {
   backgroundColor: string;
@@ -26,20 +28,60 @@ interface Props {
 }
 const MainScreen = ({ navigation, route }: Props) => {
   const { backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
-  const onPress = () => navigation.navigate('Search', {
+  const onPressSearch = () => navigation.navigate('Search', {
     stockInput
   });
   const stockInput: string = route?.params?.stockName || "삼성전자";
-  const [textState, onChangeTextState] = useState("대기");
-  const [disableTouch, setDisableTouch] = useState(false);
+  const [textState, onChangeTextState] = useState<string>("대기");
+  const [disableTouch, setDisableTouch] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const getStockPrice = () => {
+    setDisableTouch(true);
+    onChangeTextState("로딩중...");
+
+    const payload = {
+      isFree: true,
+      stock_name: stockInput,
+      uniqueId: "TEST_ID"
+    };
+    fetch(AWS_PROPER_PRICE_URL, {
+      method: "POST",
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(data => data.json())
+      .then(data => {
+        setDisableTouch(false);
+        data = JSON.parse(data.body);
+
+        if (data.status === "error") {
+          onChangeTextState(data.contents)
+        }
+        else {
+          dispatch(setStockPriceInfo(data));
+          onChangeTextState("완료");
+        }
+      });
+  };
 
   return (
     <Container backgroundColor={backgroundColor}>
-      <LongTextButton onPress={onPress} text={stockInput} />
-      <LongText text="반갑습니다" />
-      <AnalysisButton onPress={onPress} />
-      <OutlineTableView />
-      <DetailTableView />
+      <LongTextButton onPress={onPressSearch} text={stockInput} />
+      <LongText text={textState} />
+      <AnalysisButton disabled={disableTouch} onPress={getStockPrice} />
+      {
+        textState === "완료"
+        && (
+          <>
+            <OutlineTableView />
+            <DetailTableView />
+          </>
+        )
+      }
     </Container>
   );
 };

@@ -3,6 +3,7 @@ import { useWindowDimensions } from "react-native";
 import { useSelector } from "react-redux";
 import styled from "styled-components/native";
 import { RootState } from "../redux/reducer";
+import { StockPriceInfo } from "../redux/reducers/stocks";
 
 const Text = styled.Text`
   flex: 1;
@@ -75,6 +76,24 @@ interface Props {
 const DetailTableView = ({ }: Props) => {
   const width = useWindowDimensions().width;
   const { fontColor, contentBackgroundColor, backgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  let {
+    first_price,
+    second_price,
+    third_price,
+    now_price,
+  }: StockPriceInfo = useSelector((state: RootState) => state.stocks.stockPriceInfo);
+  const numberWithCommas = (x: number | string): string => x === undefined ? "" : x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const getYield = (price: number): string => {
+    let res: number = ((price - now_price) / now_price) * 100;
+    return isNaN(res) ? "" : numberWithCommas(res.toFixed(2)) + "%";
+  };
+  const first_price_comma = numberWithCommas(first_price);
+  const second_price_comma = numberWithCommas(second_price);
+  const third_price_comma = numberWithCommas(third_price);
+
+  const firstPriceYield = getYield(first_price);
+  const secondPriceYield = getYield(second_price);
+  const thirdPriceYield = getYield(third_price);
 
   return (
     <Container width={width} >
@@ -82,15 +101,15 @@ const DetailTableView = ({ }: Props) => {
         <TextLine firstText="적정주가" secondText="기준" thirdText="수익률" />
       </ColorView>
       <View width={width} backgroundColor={backgroundColor}>
-        <TextLine firstText="56,500" secondText="2차 매도가" thirdText="19.05%" />
+        <TextLine firstText={first_price_comma} secondText="2차 매도가" thirdText={firstPriceYield} />
       </View>
       <Divider />
       <View width={width} backgroundColor={backgroundColor}>
-        <TextLine firstText="52,500" secondText="1차 매도가" thirdText="10.22%" />
+        <TextLine firstText={second_price_comma} secondText="1차 매도가" thirdText={secondPriceYield} />
       </View>
       <Divider />
       <View width={width} backgroundColor={backgroundColor}>
-        <TextLine firstText="51,500" secondText="매수가" thirdText="7.62%" />
+        <TextLine firstText={third_price_comma} secondText="매수가" thirdText={thirdPriceYield} />
       </View>
     </Container>
   );

@@ -3,6 +3,7 @@ import { useWindowDimensions } from "react-native";
 import { useSelector } from "react-redux";
 import styled from "styled-components/native";
 import { RootState } from "../redux/reducer";
+import { StockPriceInfo } from "../redux/reducers/stocks";
 
 const FirstText = styled.Text`
   flex: 1;
@@ -51,23 +52,35 @@ interface Props {
 }
 const OutlineTableView = ({ }: Props) => {
   const width = useWindowDimensions().width;
-  const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  const {
+    fontColor,
+    contentBackgroundColor
+  } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
+  let {
+    D_5,
+    required_yield,
+    now_price
+  }: StockPriceInfo = useSelector((state: RootState) => state.stocks.stockPriceInfo);
+
+  const required_yield_percent = required_yield ? (required_yield * 100).toFixed(2) + "%" : "";
+  const numberWithCommas = (x: number): string => x === undefined ? "" : x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const now_price_comma = numberWithCommas(now_price);
 
   return (
     <Container width={width} backgroundColor={contentBackgroundColor}>
       <SmallView>
         <FirstText>컨센서스 기준</FirstText>
-        <SecondText>2021/12(E)</SecondText>
+        <SecondText>{D_5}</SecondText>
       </SmallView>
       <Divider />
       <SmallView>
         <FirstText>요구수익률</FirstText>
-        <SecondText>8.35%</SecondText>
+        <SecondText>{required_yield_percent}</SecondText>
       </SmallView>
       <Divider />
       <SmallView>
         <FirstText>현재가</FirstText>
-        <SecondText>73,000</SecondText>
+        <SecondText>{now_price_comma}</SecondText>
       </SmallView>
     </Container>
   );

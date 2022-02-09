@@ -47,8 +47,6 @@ interface Props {
   onPress: any;
 }
 const SearchElement = ({ stockInfo, onPress }: Props) => {
-  console.log("stockInfo", stockInfo);
-
   const width = useWindowDimensions().width;
   const { fontColor, contentBackgroundColor } = useSelector((state: RootState) => state.themes.LIGHT_MODE);
   const stockName = stockInfo.nm;

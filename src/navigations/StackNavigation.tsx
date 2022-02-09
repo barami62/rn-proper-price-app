@@ -11,6 +11,7 @@ const SearchHeader = ({ value, onChangeText }: any) => {
 
   return (
     <TextInput
+      placeholder="삼성전자"
       value={value}
       onChangeText={onChangeText}
       style={{ flex: 1, backgroundColor: contentBackgroundColor, width: 300, borderRadius: 12, justifyContent: 'center', paddingLeft: 12 }}
