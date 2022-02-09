@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducer";
 import { FNGUIDE_STOCKS_LIST } from "@env";
 import axios from "axios";
-import { setStocks, Stock } from "../redux/reducers/stocks";
+import { setIsFree, setStocks, Stock } from "../redux/reducers/stocks";
 
 interface ContainerProps {
   backgroundColor: string;
@@ -19,8 +19,9 @@ const Container = styled.View<ContainerProps>`
 
 interface Props {
   setIsLoading: Function;
+  IS_FREE: boolean;
 }
-const LoadingScreen = ({ setIsLoading }: Props) => {
+const LoadingScreen = ({ setIsLoading, IS_FREE }: Props) => {
   const [stateText, setStateText] = useState<string>("로딩중...");
   const themes = useSelector((state: RootState) => state.themes);
   const { backgroundColor }: any = themes[themes.NOW_MODE];
@@ -41,6 +42,7 @@ const LoadingScreen = ({ setIsLoading }: Props) => {
   };
 
   useEffect(() => {
+    dispatch(setIsFree(IS_FREE));
     getStocks();
   }, []);
 

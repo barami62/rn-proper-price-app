@@ -1,5 +1,6 @@
 const SET_STOCKS = 'stocks/SET_STOCKS' as const;
 const SET_STOCK_PRICE = 'stocks/SET_STOCK_PRICE' as const;
+const SET_IS_FREE = 'stocks/SET_IS_FREE' as const;
 
 export type Stock = {
   cd: string;
@@ -26,17 +27,25 @@ export const setStockPriceInfo = (stockPriceInfo: StockPriceInfo) => ({
   payload: stockPriceInfo,
 });
 
+export const setIsFree = (isFree: boolean) => ({
+  type: SET_IS_FREE,
+  payload: isFree,
+});
+
 type StockAction =
   | ReturnType<typeof setStocks>
-  | ReturnType<typeof setStockPriceInfo>;
+  | ReturnType<typeof setStockPriceInfo>
+  | ReturnType<typeof setIsFree>;
 
 interface initialState {
   stocks: Stock[];
+  isFree: boolean;
   stockPriceInfo: StockPriceInfo;
 }
 
 const initialState: initialState = {
   stocks: [],
+  isFree: true,
   stockPriceInfo: {
     "D_5": "",
     "first_price": 0,
@@ -60,6 +69,10 @@ const StockReducer = (
 
     case SET_STOCK_PRICE:
       newState.stockPriceInfo = action.payload;
+      return newState;
+
+    case SET_IS_FREE:
+      newState.isFree = action.payload;
       return newState;
 
     default:

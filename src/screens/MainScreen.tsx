@@ -35,6 +35,7 @@ const MainScreen = ({ navigation, route }: Props) => {
   const stockInput: string = route?.params?.stockName || "삼성전자";
   const [textState, onChangeTextState] = useState<string>("대기");
   const [disableTouch, setDisableTouch] = useState<boolean>(false);
+  const isFree = useSelector((state: RootState) => state.stocks.isFree);
   const dispatch = useDispatch();
 
   const getStockPrice = () => {
@@ -42,7 +43,7 @@ const MainScreen = ({ navigation, route }: Props) => {
     onChangeTextState("로딩중...");
 
     const payload = {
-      isFree: true,
+      isFree,
       stock_name: stockInput,
       uniqueId: "TEST_ID"
     };
