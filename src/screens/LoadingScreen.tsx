@@ -28,17 +28,16 @@ const LoadingScreen = ({ setIsLoading, IS_FREE }: Props) => {
   const dispatch = useDispatch();
 
   const getStocks = (): void => {
-    try {
-      axios.get(FNGUIDE_STOCKS_LIST)
-        .then(res => {
-          const stocks: Stock[] = res.data.Co;
-          dispatch(setStocks(stocks));
-          setIsLoading(false);
-        });
-    } catch (error) {
-      console.error(error);
-      setStateText("오류 발생")
-    }
+    axios.get(FNGUIDE_STOCKS_LIST)
+      .then(res => {
+        const stocks: Stock[] = res.data.Co;
+        dispatch(setStocks(stocks));
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+        setStateText("오류 발생")
+      });
   };
 
   useEffect(() => {

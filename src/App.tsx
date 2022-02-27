@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import TabNavigation from "./navigations/TabNavigation";
 import LoadingScreen from "./screens/LoadingScreen";
 import { LogBox } from 'react-native';
+import { BannerAd, BannerAdSize, TestIds } from "@react-native-firebase/admob";
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -25,6 +26,7 @@ const App = () => {
           : (
             <NavigationContainer>
               <TabNavigation />
+              <BannerAd size={BannerAdSize.FULL_BANNER} unitId={TestIds.BANNER} />
             </NavigationContainer>
           )
       }
